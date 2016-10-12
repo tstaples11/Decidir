@@ -40,6 +40,7 @@ public class indif extends AppCompatActivity {
         }
     });
         textView2 = (TextView)findViewById(R.id.textView2);
+        textView2.setTextSize(15);
         tv = (TextView) findViewById(R.id.textView);
 
         Button button3 = (Button) findViewById(R.id.button3);
@@ -47,11 +48,13 @@ public class indif extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //textView2.setText(editText.getText());
-                choices.add(editText.getText().toString());
-                textView2.append(j + ".) " + editText.getText().toString() +  "\n");
-                // this will still be buggy if too many choices are input at once
-                editText.setText("");
-                j++;
+                if(questionAsked==false) {
+                    choices.add(editText.getText().toString());
+                    textView2.append(j + ".) " + editText.getText().toString() + "\n");
+                    // this will still be buggy if too many choices are input at once
+                    editText.setText("");
+                    j++;
+                }
 
 
             }
@@ -63,7 +66,10 @@ public class indif extends AppCompatActivity {
             public void onClick(View view) {
                if((questionAsked == false) && !(choices.isEmpty())) {
                    int i = (int) (Math.random() * choices.size());
+                   //textView2.setText("");
+                   textView2.setTextSize(40);
                    textView2.setText(choices.get(i));
+
                    choices.clear();
                    editText.setText("");
                    j = 1;
@@ -75,6 +81,7 @@ public class indif extends AppCompatActivity {
                    questionAsked = false;
                    tv.setText("Help me decide whether I should:");
                    button2.setText("HELP ME CHOOSE!");
+                   textView2.setTextSize(15);
                    textView2.setText(" ");
                }
 
